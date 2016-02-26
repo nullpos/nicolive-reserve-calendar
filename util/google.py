@@ -26,7 +26,7 @@ class Google(object):
         http = self.credentials.authorize(httplib2.Http())
         service = discovery.build('calendar', 'v3', http=http)
 
-        event = service.events().insert(calendarId='primary', body=event).execute()
+        event = service.events().insert(calendarId=self.config['calendar_id'], body=event).execute()
         print('Event created: %s' % (event.get('htmlLink')))
 
 if __name__ == '__main__':
