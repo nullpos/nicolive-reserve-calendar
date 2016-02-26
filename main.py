@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import os
+import sys
 import ConfigParser
 from util.live import Live
 from util.google import Google
@@ -37,16 +38,17 @@ class Main(object):
 
         return dictionary
 
-    def run(url):
-        pass
-
+    def run(self, url):
+        live = Live(main.config.get('niconico'))
+        live_info = live.get(url)
+        google = Google(main.config.get('google'))
+        google.run(live_info)
 
 
 if __name__ == '__main__':
-    url = ''
+    if len(sys.argv) != 2:
+        print "invalid arguments"
+
+    url = sys.argv[1]
     main = Main()
-    live = Live(main.config.get('niconico'))
-    info = live.get(url)
-    print info
-    google = Google(main.config.get('google'))
-    google.run(info)
+    main.run(url)
