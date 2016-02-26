@@ -3,6 +3,7 @@
 import os
 import ConfigParser
 from util.live import Live
+from util.google import Google
 
 CONFIG_PATH = os.path.dirname(os.path.abspath(__file__)) + '/config'
 CONFIG_SAMPLE_FILE = CONFIG_PATH + '.sample'
@@ -20,17 +21,17 @@ class Main(object):
         nico = 'niconico'
         google = 'google'
 
-        mail = config.get(nico, 'mail')
+        nicomail = config.get(nico, 'mail')
         password = config.get(nico, 'password')
-        cred_path = config.get(google, 'credential')
+        calendar_id = config.get(google, 'calendar_id')
 
         dictionary = {
             nico: {
-                'mail': mail,
+                'mail': nicomail,
                 'password': password
             },
             google: {
-                'cred_path': cred_path
+                'calendar_id': calendar_id
             }
         }
 
@@ -47,3 +48,5 @@ if __name__ == '__main__':
     live = Live(main.config.get('niconico'))
     info = live.get(url)
     print info
+    google = Google(main.config.get('google'))
+    google.run(info)

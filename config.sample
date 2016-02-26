@@ -3,4 +3,4 @@ mail = hoge@fuga.com
 password = example
 
 [google]
-credential = /some/dir/credentials.json
+calendar_id = piyopiyo

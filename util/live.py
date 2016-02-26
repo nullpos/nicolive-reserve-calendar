@@ -4,6 +4,7 @@ import urllib2
 import cookielib
 import json
 import re
+import datetime
 from bs4 import BeautifulSoup as BS
 
 LOGIN_URL = 'https://secure.nicovideo.jp/secure/login'
@@ -55,11 +56,17 @@ class Live(object):
             detail[-1] = re.sub(r'\n\t$', '', detail[-1])
             detail = ('\n'.join(detail))
 
+            start = re.sub('/', '-', date) + 'T' + time + ':00'
+            dt = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S') + datetime.timedelta(hours=1)
+            end = dt.isoformat()
+
             live_info['summary'] = title
             live_info['description'] = detail
             live_info['start'] = {
-                'date': re.sub('/', '-', date),
-                'dateTime': time + ':00+09:00'
+                'dateTime': start + '+09:00'
+            }
+            live_info['end'] = {
+                    'dateTime': end + '+09:00'
             }
 
         return live_info

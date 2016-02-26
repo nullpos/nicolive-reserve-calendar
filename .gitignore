@@ -62,6 +62,6 @@ target/
 .ipynb_checkpoints
 
 # secret file
-*client_secret.json*
-*.config*
+*secret*
+*config*
 !*.sample
