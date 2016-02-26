@@ -6,6 +6,11 @@ Description
 
 add niconico live reservation to google calendar.
 
+Usage
+-----
+
+TBD
+
 License
 -----
 
