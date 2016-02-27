@@ -57,7 +57,7 @@ class Live(object):
             detail = ('\n'.join(detail))
 
             start = re.sub('/', '-', date) + 'T' + time + ':00'
-            dt = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S') + datetime.timedelta(hours=1)
+            dt = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S') + datetime.timedelta(hours=3)
             end = dt.isoformat()
 
             live_info['summary'] = title
