@@ -26,10 +26,10 @@ class Live(object):
     def get(self, url):
         html = self.opener.open(url).read()
         soup = BS(html, 'html.parser')
-        live_info = self.parse_live_page(soup)
+        live_info = self.parse_live_page(soup, url)
         return live_info
 
-    def parse_live_page(self, soup):
+    def parse_live_page(self, soup, url):
         live_info = {}
 
         title_el = soup.find(class_='gate_title')
@@ -40,7 +40,7 @@ class Live(object):
 
             kaijo_text = main_el.find(class_='hmf').get_text()
             date = re.search(u'(\d{4}\/\d{2}\/\d{2})', kaijo_text).group(1)
-            time = re.search(u'開演\:(\d{2}\:\d{2})', kaijo_text).group(1)
+            time = re.search(u'開場\:(\d{2}\:\d{2})', kaijo_text).group(1)
 
             detail_el = main_el.find(id='jsFollowingAdMain')
             # div element exist if not official live
@@ -62,6 +62,10 @@ class Live(object):
 
             live_info['summary'] = title
             live_info['description'] = detail
+            live_info['source'] = {
+                'title': title,
+                'url': url
+            }
             live_info['start'] = {
                 'dateTime': start + '+09:00'
             }

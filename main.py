@@ -40,20 +40,30 @@ class Main(object):
 
         return dictionary
 
-    def run(self, url):
+    def run(self, url, method):
         live = Live(main.config.get('niconico'))
         live_info = live.get(url)
         google = Google(main.config.get('google'))
-        google.run(live_info)
+
+        if method == 'insert':
+            google.insert(live_info)
+        elif method == 'update':
+            google.update(live_info, url)
+        elif method == 'delete':
+            google.delete(live_info, url)
+        elif method == 'search':
+            google.search(live_info, url)
+
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print "invalid arguments"
 
-    if re.match('lv', sys.argv[1]):
-        url = LIVE_BASE_URL + sys.argv[1]
+    method = sys.argv[1]
+    if re.match('lv', sys.argv[2]):
+        url = LIVE_BASE_URL + sys.argv[2]
     else:
-        url = sys.argv[1]
+        url = sys.argv[2]
     main = Main()
-    main.run(url)
+    main.run(url, method)
