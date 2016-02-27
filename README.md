@@ -4,12 +4,28 @@ NicoLive Reserve Calendar
 Description
 -----
 
-add niconico live reservation to google calendar.
+Add niconico live reservation to Google Calendar.
+python 2.7.x
 
 Usage
 -----
 
-TBD
+````
+$ virtualenv venv
+$ source ./venv/bin/activate
+$ pip install -r requirement.txt
+````
+
+put secret.json and config file in the same directory
+
+````
+$ python main.py option live_url
+````
+
+option
+- insert
+- update
+- delete
 
 License
 -----
