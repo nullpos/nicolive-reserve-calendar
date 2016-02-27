@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import os
+import re
 import sys
 import ConfigParser
 from util.live import Live
@@ -8,6 +9,7 @@ from util.google import Google
 
 CONFIG_PATH = os.path.dirname(os.path.abspath(__file__)) + '/config'
 CONFIG_SAMPLE_FILE = CONFIG_PATH + '.sample'
+LIVE_BASE_URL = 'http://live.nicovideo.jp/watch/'
 
 class Main(object):
     def __init__(self):
@@ -49,6 +51,9 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         print "invalid arguments"
 
-    url = sys.argv[1]
+    if re.match('lv', sys.argv[1]):
+        url = LIVE_BASE_URL + sys.argv[1]
+    else:
+        url = sys.argv[1]
     main = Main()
     main.run(url)
