@@ -2,7 +2,6 @@
 
 import urllib2
 import cookielib
-import json
 import re
 import datetime
 from bs4 import BeautifulSoup as BS
@@ -20,7 +19,7 @@ class Live(object):
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookiejar))
 
         opener.open(LOGIN_URL, "mail=%s&password=%s" %
-            (self.config.get('mail'), self.config.get('password')))
+                    (self.config.get('mail'), self.config.get('password')))
         return opener
 
     def get(self, url):
@@ -70,7 +69,7 @@ class Live(object):
                 'dateTime': start + '+09:00'
             }
             live_info['end'] = {
-                    'dateTime': end + '+09:00'
+                'dateTime': end + '+09:00'
             }
 
         return live_info
