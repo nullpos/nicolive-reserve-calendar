@@ -35,6 +35,9 @@ class Live(object):
         # alive
         if title_el:
             title = title_el.span.get_text()
+            if title == u'高画質対応':
+                title_el.span.extract()
+                title = title_el.span.get_text()
             main_el = soup.find(class_='textbox')
 
             kaijo_text = main_el.find(class_='hmf').get_text()
