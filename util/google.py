@@ -46,7 +46,7 @@ class Google(object):
     def update(self, live_info, url):
         event_id = self.search(live_info, url)
         event = self.service.events().update(calendarId=self.config.get('calendar_id'),
-                                             eventId=event_id).execute()
+                                             eventId=event_id, body=live_info).execute()
         print('Event updated: %s' % (event.get('htmlLink')))
 
 if __name__ == '__main__':
